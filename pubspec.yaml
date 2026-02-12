@@ -1,7 +1,7 @@
-name: seungjoon_utils
+name: extify
 description: "내가 사용할 플러터 유틸리티 패키지"
 version: 1.0.0
-homepage: https://github.com/seungjoonH/seungjoon_utils
+homepage: https://github.com/seungjoonH/extify
 
 environment:
   sdk: ^3.5.4
@@ -10,11 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^5.5.0
+  cloud_firestore: ^5.6.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:

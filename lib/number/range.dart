@@ -1,4 +1,4 @@
-import 'package:seungjoon_utils/util.dart';
+import 'package:extify/util.dart';
 
 /// 숫자 자료형 [num] 의 범위에 대한 다양한 기능을 제공합니다.
 class _NumRange<T extends num> {

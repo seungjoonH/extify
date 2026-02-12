@@ -781,9 +781,9 @@ void main() {
 
     ```yaml
     dependencies:
-      seungjoon_utils:
+      extify:
         git:
-          url: https://github.com/seungjoonH/seungjoon_utils.git
+          url: https://github.com/seungjoonH/extify.git
           ref: latest
     ```
 
@@ -791,9 +791,9 @@ void main() {
 
     ```yaml
     dependencies:
-      seungjoon_utils:
+      extify:
         git:
-          url: https://github.com/seungjoonH/seungjoon_utils.git
+          url: https://github.com/seungjoonH/extify.git
           ref: v1.0.0
     ```
 
@@ -807,10 +807,10 @@ void main() {
 
 3. 패키지 임포트
 
-    사용하려는 프로젝트에서 `seungjoon_utils` 를 import 하세요.
+    사용하려는 프로젝트에서 `extify` 를 import 하세요.
     
     ```dart
-    import 'package:seungjoon_utils/util.dart';
+    import 'package:extify/util.dart';
     ```
 
 4. 유틸리티 기능 사용
@@ -824,7 +824,7 @@ void main() {
 **최신 버전을 가져오려면:**
 
 ```bash
-flutter pub upgrade seungjoon_utils
+flutter pub upgrade extify
 ```
 
 

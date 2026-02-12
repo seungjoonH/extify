@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seungjoon_utils/bool/extension.dart';
-import 'package:seungjoon_utils/date_time/enum.dart';
+import 'package:extify/bool/extension.dart';
+import 'package:extify/date_time/enum.dart';
 
 DateTime get _now => DateTime.now();
 
