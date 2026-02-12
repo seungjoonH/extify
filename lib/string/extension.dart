@@ -1,4 +1,4 @@
-import 'package:seungjoon_utils/util.dart';
+import 'package:extify/util.dart';
 
 extension StringExtension on String {
   String get reversed => split('').reversed.join('');
@@ -8,6 +8,20 @@ extension KoreanExtension on String {
   static const _cho = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
   static const _jung = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
   static const _jong = ' ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ';
+
+  static const _ijungmoeum = {
+    'ㅘ': ['ㅗㅏ'],
+    'ㅚ': ['ㅗㅣ'],
+    'ㅟ': ['ㅜㅣ'],
+    'ㅢ': ['ㅡㅣ'],
+    'ㅐ': ['ㅏㅣ'],
+    'ㅒ': ['ㅑㅣ'],
+    'ㅔ': ['ㅓㅣ'],
+    'ㅖ': ['ㅕㅣ'],
+    'ㅝ': ['ㅜㅓ'],
+    'ㅙ': ['ㅗㅐ', 'ㅘㅣ', 'ㅗㅏㅣ'],
+    'ㅞ': ['ㅜㅔ', 'ㅝㅣ', 'ㅜㅓㅣ'],
+  };
 
   int get _index => runes.last - 0xAC00;
   String get _choseong { assert(length == 1); return _cho[_index ~/ 588]; }
@@ -35,21 +49,37 @@ extension KoreanExtension on String {
   String get puleossugi => split('').map((e) => e._puleossugi).join('');
 
   String get moassugi {
-    List<(String, bool)> list = split('').map<(String, bool)>((e) => (e, e.isJaeum)).toList();
+    String string = this;
+
+    for (var key in _ijungmoeum.keys) {
+      List<String> moeums = _ijungmoeum[key]!;
+      for (var moeum in moeums) {
+        if (!string.contains(moeum)) continue;
+        string = string.replaceAll(moeum, key);
+        break;
+      }
+    }
+
+    List<(String, bool)> list = string.split('').map<(String, bool)>((e) => (e, e.isJaeum)).toList();
     List<String> result = [], char = [];
     bool moeumFlag = false;
 
-    for (var entry in list.reversed) {
-      char.insert(0, entry.$1);
-      if (entry.$2) {
-        if (moeumFlag) {
-          result.insert(0, char.join('')._moassugi);
-          char.clear();
-          moeumFlag = false;
-        }
+    for (final entry in list.reversed) {
+      final charValue = entry.$1;
+      final isJaeum = entry.$2;
+
+      char.insert(0, charValue);
+
+      if (!isJaeum) {
+        moeumFlag = true;
         continue;
       }
-      moeumFlag = true;
+
+      if (moeumFlag) {
+        result.insert(0, char.join('')._moassugi);
+        char.clear();
+        moeumFlag = false;
+      }
     }
 
     return result.join('');
@@ -77,7 +107,7 @@ extension KoreanExtension on String {
   bool get _isHangeul { assert(length == 1); return isJaeum || isMoeum || isEumjeol; }
 
   bool get isHangeul => split('').every((e) => e._isHangeul || e == ' ');
-  bool get hasHangeul => split('').any((char) => char.isHangeul);
+  bool get hasHangeul => split('').any((char) => char.length == 1 && char._isHangeul);
   bool get hasSeparatedJaeumOrMoeum => split('').map((e) => e.isJaeum || e.isMoeum).contains(true);
 
   bool containsHangeul(String other) => puleossugi.contains(other.puleossugi);
