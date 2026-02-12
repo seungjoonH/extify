@@ -1,6 +1,6 @@
 name: extify
 description: "Lightweight Dart extension utilities for String, Number, DateTime, List, and more — with Korean language support"
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/seungjoonH/extify
 repository: https://github.com/seungjoonH/extify
 
