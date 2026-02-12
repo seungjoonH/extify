@@ -1,4 +1,5 @@
-import 'package:extify/util.dart';
+import 'package:extify/list/extension.dart';
+import 'package:extify/number/range.dart';
 
 extension StringExtension on String {
   String get reversed => split('').reversed.join('');

@@ -1,21 +1,12 @@
 name: extify
-description: "내가 사용할 플러터 유틸리티 패키지"
+description: "Lightweight Dart extension utilities for String, Number, DateTime, List, and more — with Korean language support"
 version: 1.0.1
 homepage: https://github.com/seungjoonH/extify
 repository: https://github.com/seungjoonH/extify
 
 environment:
   sdk: ^3.5.4
-  flutter: ">=1.17.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
-  cloud_firestore: ^5.6.2
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^5.0.0
-
-flutter:
+  test: ^1.25.0
+  lints: ^5.0.0

@@ -1,16 +1,14 @@
-# Flutter Utils Package
+# Dart Utils Package
 
 ## 📋 목차
 
 - [📝 개요](#-개요)
-- [📦 의존 패키지](#-의존-패키지)
 - [🔧 기능](#-기능)
   - [논리 자료형 `bool` 관련](#논리-자료형-bool-관련)
   - [날짜 및 시간 `DateTime` 관련](#날짜-및-시간-DateTime-관련)
   - [배열 `List` 관련](#배열-List-관련)
   - [숫자 `num`, `int`, `double` 관련](#숫자-num-int-double-관련)
   - [문자열 `String` 관련](#문자열-String-관련)
-  - [위젯 `Widget` 관련](#위젯-Widget-관련)
 - [🚀 사용법](#-사용법)
 - [🔄 업데이트 정보](#-업데이트-정보)
 
@@ -23,21 +21,14 @@
 
 ### 설명
 
-- 내가 사용하려고 만든 <u>**플러터 기반 유틸리티 패키지**</u> 입니다.
+- 내가 사용하려고 만든 <u>**Dart 기반 유틸리티 패키지**</u> 입니다.
 - 필요한 기능이 있다면 마음대로 사용하셔도 괜찮습니다.
 
 ### 의의
 
 - **개발 편의성**을 향상할 수 있습니다.
 - 서로 다른 프로젝트에 **범용적으로 사용**될 수 있습니다.
-- ~~협업 시 같은 기능을 하는 코드를 각자 개발하는 등의 개발력 낭비를 최소화 할 수 있습니다.~~
-
-## 📦 의존 패키지
-
-- 다음의 패키지에 의존적입니다.
-
-  > `cloud_firestore`: 5.5.0
-
+- 협업 시 같은 기능을 하는 코드를 각자 개발하는 등의 개발력 낭비를 최소화 할 수 있습니다.
 
 ## 🔧 기능
 
@@ -60,13 +51,13 @@
 
 #### Extension
 
-- `toTimestamp: Timestamp` - **Getter**
+- `toMillis: int` - **Getter**
 
-  Firebase 시간 사용 형식 `Timestamp` 으로 변환합니다.
+  Unix Epoch 기준 밀리초를 반환합니다.
 
   ```dart
   void main() {
-    print(DateTime.now().toTimestamp); // Timestamp(seconds=1732804031, nanoseconds=349966000)
+    print(DateTime.now().toMillis); // 1732804031349
   }
   ```
 
@@ -635,200 +626,78 @@ void main() {
 }
 ```
 
-##### `QueryUrlConverter` 쿼리 및 URL 상호 변환기
-
-**생성자 매개변수**
-
-| 자료형 | 변수명 | 설명 |
-|:-:|:-:|:-:|
-| `String` | value | 변환할 최초 텍스트 |
-
-
-**사용법**
-
-```dart
-void main() {
-  String query = 'v1_SLapi_SLuser_QMid_EQLa1b2c3_AMPname_EQLJohn';
-  String url = 'v1/api/user?id=a1b2c3&name=John';
-  print(QueryUrlConverter(query).query); // v1_SLapi_SLuser_QMid_EQLa1b2c3_AMPname_EQLJohn
-  print(QueryUrlConverter(query).url);   // v1/api/user?id=a1b2c3&name=John
-  print(QueryUrlConverter(url).query);   // v1_SLapi_SLuser_QMid_EQLa1b2c3_AMPname_EQLJohn
-  print(QueryUrlConverter(url).url);     // v1/api/user?id=a1b2c3&name=John
-}
-```
-
-### 위젯 `Widget` 관련
-
-#### Extension
-
-##### Widget Align Extension
-
-- `fill: Widget` - **Getter**
-
-  위젯을 화면 전체를 차지하도록 `Positioned.fill` 로 감싼 위젯을 반환합니다.
-
-- `topLeft: Widget` - **Getter**
-
-  위젯을 부모 위젯의 좌측 상단에 `Positioned` 로 배치합니다.
-
-- `topRight: Widget` - **Getter**
-
-  위젯을 부모 위젯의 우측 상단에 `Positioned` 로 배치합니다.
-
-- `bottomLeft: Widget` - **Getter**
-
-  위젯을 부모 위젯의 좌측 하단에 `Positioned` 로 배치합니다.
-
-- `bottomRight: Widget` - **Getter**
-
-  위젯을 부모 위젯의 우측 하단에 `Positioned` 로 배치합니다.
-
-- `top: Widget` - **Getter**
-
-  위젯을 부모 위젯의 상단에 고정된 Y좌표로 배치합니다.
-
-- `bottom: Widget` - **Getter**
-
-  위젯을 부모 위젯의 하단에 고정된 Y좌표로 배치합니다.
-
-- `left: Widget` - **Getter**
-
-  위젯을 부모 위젯의 좌쪽에 고정된 X좌표로 배치합니다.
-
-- `right: Widget` - **Getter**
-
-  위젯을 부모 위젯의 우쪽에 고정된 X좌표로 배치합니다.
-
-- `center: Widget` - **Getter**
-
-  위젯을 부모 위젯의 중앙에 배치하도록 `Center` 로 감싼 위젯을 반환합니다.
-
-
-```dart
-void main() {
-  Widget buildWidget(String text) => Container(
-    width: 100.0, height: 100.0,
-    color: Colors.black.withOpacity(.2),
-    alignment: Alignment.center,
-    child: Text(text, style: const TextStyle(color: Colors.white)),
-  );
-
-  SizedBox(
-    width: 400.0, height: 400.0,
-    child: Stack(
-      children: [
-        Container(color: Colors.blue.withOpacity(.5)).fill,
-        buildWidget('topLeft').topLeft,
-        buildWidget('topRight').topRight,
-        buildWidget('bottomLeft').bottomLeft,
-        buildWidget('bottomRight').bottomRight,
-        buildWidget('topCenter').topCenter,
-        buildWidget('bottomCenter').bottomCenter,
-        buildWidget('leftCenter').leftCenter,
-        buildWidget('rightCenter').rightCenter,
-        buildWidget('center').center,
-      ],
-    ),
-  );
-}
-```
-
-![widget-align_extension](https://github.com/user-attachments/assets/a0bd44e7-3b5c-449e-b2dc-2df25b168a1a)
-
-##### Iterable Widget Extension
-
-- `separateW({double? interval, Widget? separator}): List<Widget>` - **Method**
-
-  위젯 사이에 가로 방향 구분자를 추가하여 반환합니다.
-
-- `separateH({double? interval, Widget? separator}): List<Widget>` - **Method**
-
-  위젯 사이에 세로 방향 구분자를 추가하여 반환합니다.
-
-```dart
-void main() {
-  Widget buildWidget(int index) => Container(
-    width: 30.0,
-    color: Colors.lightBlueAccent,
-    child: Text(
-      '$index', textAlign: TextAlign.center,
-      style: const TextStyle(color: Colors.white),
-    ),
-  );
-  List<Widget> children = List.generate(5, buildWidget);
-
-  Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(children: children.separateW(interval: 20.0)),
-      const SizedBox(height: 30.0),
-      Column(children: children.separateH(interval: 20.0)),
-    ],
-  );
-}
-```
-
-![iterable_widget_extension](https://github.com/user-attachments/assets/f8225126-34fd-4464-8b24-5dd584606ec5)
-
-
 ## 🚀 사용법
 
-### 의존성 추가
+### 설치
 
-1. 각 프로젝트의 `pubspec.yaml` 에 이 패키지를 의존성으로 추가합니다.
-
-  - 최신버전
-
-    ```yaml
-    dependencies:
-      extify:
-        git:
-          url: https://github.com/seungjoonH/extify.git
-          ref: latest
-    ```
-
-  - 특정버전
-
-    ```yaml
-    dependencies:
-      extify:
-        git:
-          url: https://github.com/seungjoonH/extify.git
-          ref: v1.0.0
-    ```
-
-2. `pub get` 실행
-
-    아래 명령어를 실행하여 의존성을 설치합니다.
-    
-    ```bash
-    flutter pub get
-    ```
-
-3. 패키지 임포트
-
-    사용하려는 프로젝트에서 `extify` 를 import 하세요.
-    
-    ```dart
-    import 'package:extify/util.dart';
-    ```
-
-4. 유틸리티 기능 사용
-
-5. 버전 업데이트
-
-    패키지에 변경 사항이 있을 때 `pubspec.yaml` 의 의존성을 업데이트합니다.
-
-<br>
-
-**최신 버전을 가져오려면:**
+#### pub.dev (권장)
 
 ```bash
-flutter pub upgrade extify
+dart pub add extify
+```
+
+또는 `pubspec.yaml` 에 직접 추가:
+
+```yaml
+dependencies:
+  extify: ^1.0.1
+```
+
+#### GitHub
+
+- 최신버전
+
+  ```yaml
+  dependencies:
+    extify:
+      git:
+        url: https://github.com/seungjoonH/extify.git
+        ref: latest
+  ```
+
+- 특정버전
+
+  ```yaml
+  dependencies:
+    extify:
+      git:
+        url: https://github.com/seungjoonH/extify.git
+        ref: v1.0.1
+  ```
+
+### 의존성 설치
+
+```bash
+dart pub get
+```
+
+### 임포트
+
+```dart
+import 'package:extify/util.dart';
+```
+
+필요한 모듈만 개별적으로 임포트할 수도 있습니다:
+
+```dart
+import 'package:extify/string.dart';
+import 'package:extify/number.dart';
+```
+
+### 업데이트
+
+```bash
+dart pub upgrade extify
 ```
 
 
 ## 🔄 업데이트 정보
+
+#### v1.0.1 (2026-02-12)
+
+- 순수 Dart 패키지로 전환 (외부 의존성 완전 제거)
+- `toTimestamp` → `toMillis` 변경
+- `hasHangeul`, `moassugi` 버그 수정
 
 #### v1.0.0 (2024-12-01)
 

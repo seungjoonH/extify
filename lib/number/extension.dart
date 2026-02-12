@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:extify/util.dart';
+import 'package:extify/number/range.dart';
+import 'package:extify/string/extension.dart';
 
 extension IntExtension on int {
   /// 정수 자료형 [int] 을 논리 자료형 [bool] 로 변환합니다.

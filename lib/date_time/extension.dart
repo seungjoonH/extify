@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:extify/bool/extension.dart';
 import 'package:extify/date_time/enum.dart';
 
 DateTime get _now => DateTime.now();
 
 extension DateTimeExtension on DateTime {
-  /// Firebase 시간 사용 형식 [Timestamp] 으로 변환합니다.
-  Timestamp get toTimestamp => Timestamp.fromDate(this);
+  /// Unix Epoch 기준 밀리초를 반환합니다.
+  int get toMillis => millisecondsSinceEpoch;
 
   /// [DateTime] 의 시간부를 제외합니다.
   /// 2024.11.28 17:46:42 -> 2024.11.28 00:00:00

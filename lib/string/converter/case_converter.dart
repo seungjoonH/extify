@@ -18,7 +18,6 @@ class StringCaseConverter {
       case StringCaseType.titleCase: titleCase = value; break;
       case StringCaseType.lowerCase: lowerCase = value; break;
       case StringCaseType.upperCase: upperCase = value; break;
-      default: throw ArgumentError('Unknown case type for: $value');
     }
   }
 
